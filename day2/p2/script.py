@@ -8,7 +8,6 @@ with open("input.txt", "r") as f:
         while removal != len(curr):
             rm_curr = list(curr)
             if removal != -1:
-                print(removal)
                 rm_curr.pop(removal)
             safe = True
             prev = None
