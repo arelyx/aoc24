@@ -1,7 +1,7 @@
 import re
 
 crossword = []
-with open("input2.txt", "r") as f:
+with open("input.txt", "r") as f:
     for line in f.readlines():
         crossword.append(line.strip())
 
@@ -24,7 +24,7 @@ for i, line in enumerate(crossword):
         crossword_rot[j] = crossword_rot[j]+char
 
 # vertical forward
-for line in crossword:
+for line in crossword_rot:
     sols += len(re.findall(r'(XMAS)', line))
 
 # vertical backward
@@ -34,7 +34,6 @@ for line in crossword_rot:
 crossword_rightshift = []
 for i, line in enumerate(crossword):
     crossword_rightshift.append(i * " " + line + ((len(crossword[0]) - 1 - i) * " "))
-    # print(len(crossword_rightshift[-1]))
 
 crossword_rightshift_rot = []
 for x in range(len(crossword_rightshift[0])):
@@ -44,21 +43,17 @@ for i, line in enumerate(crossword_rightshift):
     for j, char in enumerate(line):
         crossword_rightshift_rot[j] = crossword_rightshift_rot[j]+char
 
-# for line in crossword_rightshift_rot:
-#     print(line)
-
 # diagonal rightshift forward
-for line in crossword:
+for line in crossword_rightshift_rot:
     sols += len(re.findall(r'(XMAS)', line))
 
 # diagonal rightshift backward
-for line in crossword_rot:
+for line in crossword_rightshift_rot:
     sols += len(re.findall(r'(SAMX)', line))
 
 crossword_leftshift = []
 for i, line in enumerate(crossword):
     crossword_leftshift.append(((len(crossword[0]) - 1 - i) * " ") + line + i * " ")
-    # print(len(crossword_leftshift[-1]))
 
 crossword_leftshift_rot = []
 for x in range(len(crossword_leftshift[0])):
@@ -69,12 +64,11 @@ for i, line in enumerate(crossword_leftshift):
         crossword_leftshift_rot[j] = crossword_leftshift_rot[j]+char
 
 # diagonal leftshift forward
-for line in crossword:
+for line in crossword_leftshift_rot:
     sols += len(re.findall(r'(XMAS)', line))
 
 # diagonal leftshift backward
-for line in crossword_rot:
+for line in crossword_leftshift_rot:
     sols += len(re.findall(r'(SAMX)', line))
-
 
 print(sols)
