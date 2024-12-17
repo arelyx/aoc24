@@ -3,10 +3,10 @@ with open("input.txt", "r") as f:
     disk_zip = f.readline().strip()
 
 def disk_builder(ordering, disk_struct):
-    disk = ""
+    disk = []
     for file in ordering:
-        disk += disk_struct[file]["size"] * str(disk_struct[file]["id"])
-        disk += disk_struct[file]["free"] * "."
+        disk = disk + disk_struct[file]["size"] * [str(disk_struct[file]["id"])]
+        disk = disk + disk_struct[file]["free"] * ["."]
     return disk
 
 # create dictionary structure for disk_zip
